@@ -1,4 +1,4 @@
-package com.example.canvas.ui.theme
+package com.example.canvas.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
