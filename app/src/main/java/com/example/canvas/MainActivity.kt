@@ -40,6 +40,10 @@ fun Greeting(modifier: Modifier = Modifier) {
         modifier = modifier,
         rating = rating,
         onRatingChanged = { rating = it },
+        onRatingCompleted = {
+            // Handle rating completion
+            // You can perform any necessary actions here such as do animations while dragging as we don't want to do it instantly
+        },
         maxRating = 5
     )
 }

@@ -27,6 +27,7 @@ fun StarRatingView(
     modifier: Modifier = Modifier,
     rating: Float,
     onRatingChanged: (newRating: Float) -> Unit = {},
+    onRatingCompleted: () -> Unit = {},
     maxRating: Int = 5,
     enableDragging: Boolean = true,
     enableTapping: Boolean = true,
@@ -37,7 +38,11 @@ fun StarRatingView(
                 if (enableDragging) {
                     Modifier
                         .pointerInput(Unit) {
-                            detectHorizontalDragGestures { change, dragAmount ->
+                            detectHorizontalDragGestures(
+                                onDragEnd = {
+                                    onRatingCompleted()
+                                }
+                            ) { change, dragAmount ->
                                 val width = size.width.toFloat()
                                 val newRating = (change.position.x / width) * maxRating
                                 onRatingChanged(newRating)
@@ -55,6 +60,7 @@ fun StarRatingView(
                             val rawRating = (offset.x / width) * maxRating
                             val newRating = ceil(rawRating)
                             onRatingChanged(newRating)
+                            onRatingCompleted()
                         }
                     }
                 } else {
